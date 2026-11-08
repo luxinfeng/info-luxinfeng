@@ -1,14 +1,7 @@
-const articleLinks = document.querySelectorAll('.featured-article, .article-index a');
 const notesList = document.querySelector('#notes-list');
-
-for (const article of articleLinks) {
-  const link = document.createElement('a');
-  link.href = article.href;
-  link.target = '_blank';
-  link.rel = 'noopener noreferrer';
-  link.textContent = article.querySelector('h3').innerText.replace(/\n/g, ' ');
-  notesList.append(link);
-}
+const articleTopics = document.querySelector('.article-topics').cloneNode(true);
+articleTopics.querySelector('details').open = true;
+notesList.append(articleTopics);
 
 for (const link of document.querySelectorAll('[data-dialog]')) {
   const dialog = document.getElementById(link.dataset.dialog);

@@ -193,7 +193,8 @@ h1 span {
 
 .welcome-note {
   padding-bottom: 8px;
-  flex-shrink: 0;
+  width: 36%;
+  max-width: 400px;
 }
 
 .welcome-note p {
@@ -640,31 +641,129 @@ h2 {
   font-size: 20px;
 }
 
-.article-index {
-  margin-top: 24px;
+.article-topics {
+  margin-top: 28px;
+  border-top: 1px solid var(--line);
 }
 
-.article-index a {
-  display: grid;
-  grid-template-columns: 135px 1fr 50px 20px;
-  gap: 22px;
-  padding: 21px 0;
+.topic-group {
   border-bottom: 1px solid var(--line);
-  align-items: center;
 }
 
-.article-index a > span, .article-index time {
+.topic-group summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding: 20px 0;
+  cursor: pointer;
+  list-style: none;
+}
+
+.topic-group summary::-webkit-details-marker {
+  display: none;
+}
+
+.topic-group summary:focus-visible {
+  outline: 3px solid #c66a36;
+  outline-offset: 4px;
+}
+
+.topic-group summary strong {
+  display: block;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.topic-group summary small {
+  display: block;
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 3px;
+}
+
+.topic-toggle {
+  color: var(--accent);
+  font-size: 23px;
+  transition: transform .2s;
+}
+
+.topic-group[open] .topic-toggle {
+  transform: rotate(45deg);
+}
+
+.topic-entries {
+  padding: 0 0 20px 18px;
+  border-left: 2px solid #d7bba0;
+  margin-bottom: 20px;
+}
+
+.topic-entry {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 18px;
+  padding: 12px 0;
+  font-size: 13px;
+  border-bottom: 1px solid var(--line);
+  overflow-wrap: anywhere;
+}
+
+.topic-entry:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.topic-entry small {
+  display: block;
+  color: var(--muted);
+  font-size: 10px;
+  margin-top: 4px;
+}
+
+a.topic-entry:hover {
+  color: var(--accent);
+}
+
+.topic-entry > span:last-child {
+  flex-shrink: 0;
+  color: var(--accent);
+}
+
+.topic-entry .source-label {
   font-size: 10px;
   color: var(--muted);
 }
 
-.article-index h3 {
-  font-size: 14px;
+.notes-topics {
+  margin-bottom: 24px;
+}
+
+.capability-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px 48px;
+}
+
+.capability-grid article {
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
+}
+
+.capability-grid article:last-child {
+  grid-column: 1 / -1;
+}
+
+.capability-grid h3 {
+  font-size: 17px;
   font-weight: 500;
 }
 
-.article-index a:hover h3 {
-  color: var(--accent);
+.capability-grid p {
+  color: var(--muted);
+  font-size: 13px;
+  margin-top: 10px;
+  line-height: 2;
 }
 
 .about {
@@ -724,6 +823,12 @@ h2 {
   max-width: 390px;
 }
 
+.experience .experience-date {
+  margin: 0 0 5px;
+  color: var(--accent);
+  font-size: 11px;
+}
+
 .writing-stats {
   display: grid;
   grid-template-columns: repeat(4, 1fr) 1.75fr;
@@ -738,6 +843,7 @@ h2 {
 .writing-stats strong {
   display: block;
   font: 30px var(--serif);
+  white-space: nowrap;
   font-variant-numeric: lining-nums tabular-nums;
 }
 
@@ -917,33 +1023,6 @@ h2 {
   margin-top: 13px;
 }
 
-.notes-list {
-  margin: 24px 0;
-}
-
-.notes-list a {
-  padding: 15px 0;
-  border-top: 1px solid var(--line);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 20px;
-  font-size: 13px;
-}
-
-.notes-list a:last-child {
-  border-bottom: 1px solid var(--line);
-}
-
-.notes-list a:hover {
-  color: var(--accent);
-}
-
-.notes-list a::after {
-  content: "↗";
-  color: var(--accent);
-}
-
 .dialog-avatar {
   border: 1px solid var(--line);
   border-radius: 50%;
@@ -1012,7 +1091,7 @@ h2 {
 }
 
 .research-panel a {
-  display: block;
+  display: flex;
   color: var(--accent);
   font-size: 12px;
   margin-top: 12px;
@@ -1157,6 +1236,8 @@ h2 {
   }
   .welcome-note {
     padding: 0;
+    width: 100%;
+    max-width: none;
   }
   .welcome-note p {
     font-size: 11px;
@@ -1328,28 +1409,22 @@ h2 {
     font-size: 23px;
     margin-top: 20px;
   }
-  .article-index a {
-    grid-template-columns: 1fr auto;
-    gap: 5px 12px;
-    padding: 17px 0;
+  .capability-grid {
+    grid-template-columns: 1fr;
+    gap: 23px;
   }
-  .article-index a > span:first-child {
-    grid-column: 1;
-    grid-row: 1;
+  .topic-group summary strong {
+    font-size: 14px;
   }
-  .article-index h3 {
-    grid-column: 1;
-    grid-row: 2;
-    font-size: 13px;
+  .topic-group summary small {
+    font-size: 10px;
   }
-  .article-index time {
-    grid-column: 2;
-    grid-row: 1;
+  .topic-entry {
+    font-size: 12px;
+    gap: 12px;
   }
-  .article-index a > span:last-child {
-    grid-column: 2;
-    grid-row: 2;
-    text-align: right;
+  .topic-entries {
+    padding-left: 12px;
   }
   .about {
     grid-template-columns: 1fr;
@@ -1403,11 +1478,11 @@ h2 {
   .studio-dialog h2 {
     font-size: 24px;
   }
-  .notes-list a {
-    font-size: 12px;
-  }
   .research-tabs {
-    gap: 23px;
+    gap: 16px;
+  }
+  .research-tabs button {
+    font-size: 11px;
   }
   .research-panel h3 {
     font-size: 18px;
